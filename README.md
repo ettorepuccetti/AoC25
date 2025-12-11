@@ -1,4 +1,4 @@
-# Advent of Code 2023 [Typescript]
+# Advent of Code 2025 [Typescript]
 
 ## How to run script from shell
 
