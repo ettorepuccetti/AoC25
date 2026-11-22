@@ -12,6 +12,7 @@ describe("01", () => {
   });
 
   it("updateIndex normalizes large left rotations", () => {
+    expect(updateIndex(50, parseLine("L51"))).toEqual(99);
     expect(updateIndex(50, parseLine("L151"))).toEqual(99);
     expect(updateIndex(50, parseLine("L251"))).toEqual(99);
     expect(updateIndex(50, parseLine("L301"))).toEqual(49);

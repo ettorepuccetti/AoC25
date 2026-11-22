@@ -16,11 +16,15 @@ export function firstPuzzleResolver(filePath: string): number {
   return result;
 }
 
+function mod(n: number, m: number): number {
+  return ((n % m) + m) % m;
+}
+
 export function updateIndex(startIndex: number, dialCommand: DialCommand) {
   if (dialCommand.direction === Direction.Left) {
-    return (startIndex - dialCommand.count + 100) % 100;
+    return mod(startIndex - dialCommand.count, 100);
   } else {
-    return (startIndex + dialCommand.count) % 100;
+    return mod(startIndex + dialCommand.count, 100);
   }
 }
 
