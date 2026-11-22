@@ -1,8 +1,9 @@
 import { syncReadFile } from "../utils/utils";
 
+const STARTING_INDEX: number = 50;
+
 export function firstPuzzleResolver(filePath: string): number {
   const lines: string[] = syncReadFile(filePath);
-  const STARTING_INDEX: number = 50;
   let result = 0;
   let currentIndex: number = STARTING_INDEX;
   for (const line of lines) {
@@ -43,7 +44,31 @@ export enum Direction {
 }
 
 export function secondPuzzleResolver(filePath: string) {
-  console.log("second puzzle result: ");
+  const lines: string[] = syncReadFile(filePath);
+  let result = 0;
+  let currentIndex: number = STARTING_INDEX;
+
+  for (const line of lines) {
+    const dialCommand: DialCommand = parseLine(line);
+    result += countPassFromZero(currentIndex, dialCommand);
+    currentIndex = updateIndex(currentIndex, dialCommand);
+  }
+
+  return result;
 }
 
-console.log("first puzzle result: ", firstPuzzleResolver("01/input.txt"));
+export function countPassFromZero(startIndex: number, dialCommand: DialCommand): number {
+  let result;
+  if (dialCommand.direction === Direction.Left) {
+    result = Math.floor(((startIndex - dialCommand.count) * -1) / 100) + 1;
+    if (startIndex === 0) {
+      result--;
+    }
+  } else {
+    result = Math.floor((startIndex + dialCommand.count) / 100);
+  }
+  return result;
+}
+
+// console.log("first puzzle result: ", firstPuzzleResolver("01/input.txt"));
+console.log("second puzzle result: ", secondPuzzleResolver("01/input.txt"));
